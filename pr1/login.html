@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="form-box">
+        <h1>Вход в систему</h1>
+        <form method="POST" action="/login">
+            <label for="login">Логин</label>
+            <input id="login" name="login" type="text">
+
+            <label for="password">Пароль</label>
+            <input id="password" name="password" type="password">
+
+            <button class="submit">Войти</button>
+        </form>
+        <p>Еще не зраегистрированны? <a href="/register">Регистрация</a></p>
+    </section>
+{% endblock %}

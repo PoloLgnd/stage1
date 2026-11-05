@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Вход - Конференция РФ{% endblock %}</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="header__logo">Конфиренция РФ</a>
+        <nav class="nav">
+            <a href="/login" class="nav__link">Вход</a>
+            <a href="/register" class="nav__link">Регистрация</a>
+        </nav>
+    </header>
+    <main class="main">
+        {% block content %}
+            
+        {% endblock %}
+    </main>
+    <footer class="footer">
+        <p>Конфиренции 2027</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <label for="room">Помещение</label>
+    <select name="room_id" id="room">
+        <option value="">Выберите</option>
+        <option value="1">Аудитория</option>
+        <option value="2">Коворкинг</option>
+    </select>
+
+    <input type="radio" id="pay1" name="payment_method" value="При очном посещении">
+    <label for="pay1">ПРи очном посещении</label>
+    <input type="radio" id="pay2" name="payment_method" value="Перевод по СБП">
+    <label for="pay2">Перевод по СБП</label>
+
+    <label for="review">Отзыв</label>
+    <textarea name="text" id="review" rows="3"></textarea>
+{% endblock %}
