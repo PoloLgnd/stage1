@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <section class="form-box">
+        <h1>Регистрация в систему</h1>
+        <form method="POST" action="/login">
+            <label for="login">Логин</label>
+            <input placeholder="ivan0123" id="login" name="login" type="text">
+
+            <label for="password">Пароль</label>
+            <input id="password" name="password" type="password">
+
+            <label for="fio">ФИО</label>
+            <input placeholder="Иван Иванов Иванович" id="fio" name="fio" type="fio">
+
+            <label for="tel">Телефон</label>
+            <input placeholder="7 xxx xxx xx xx" id="tel" name="tel" type="phone">
+
+            <label for="email">Почта</label>
+            <input placeholder="example@email.com" id="email" name="email" type="email">
+
+            <button class="submit">Зарегистрироваться</button>
+        </form>
+        <p>Уже зарегистрированны? <a href="/login">Войти</a></p>
+    </section>
+{% endblock %}

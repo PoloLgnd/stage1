@@ -1,4 +1,4 @@
-from flask import Flask, render_tempates, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
@@ -10,7 +10,7 @@ from models import Users
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'BALDBALD'
-app.config['SQLALCHEMY_DATEBASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.py'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
@@ -27,12 +27,16 @@ with app.app_context():
 
 @app.route('/login')
 def login():
-    return render_tempates('login.html')
+    return render_template('login.html')
 
-@app.route('/index')
+@app.route('/')
 def index():
-    return render_tempates('index.html')
+    return render_template('index.html')
 
 @app.route('/rooms')
-def login():
-    return render_tempates('rooms.html')
+def rooms():
+    return render_template('rooms.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=5000, host='0.0.0.0')
