@@ -3,33 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Вход - Конференция РФ{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' ) }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css' ) }}">
+    <title>{% block title %}Конференции.РФ{% endblock %}</title>
+    <!-- Bootstrap подключён локально: на экзамене нет интернета -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <!-- Наши стили подключаем ПОСЛЕ Bootstrap, чтобы они имели приоритет -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="page">
     <!-- Шапка -->
     <header class="header">
         <div class="container header__inner">
-            <a class="header__logo" href="/">Конференции.РФ</a>
+            <a class="header__logo" href="{{ url_for('index') }}">
+                <img class="header__logo-img" src="{{ url_for('static', filename='img/logo.png') }}" alt="Логотип">
+                <span>Конференции.РФ</span>
+            </a>
             <nav class="nav">
-                <a class="nav__link" href="/rooms">Мои заявки</a>
-                <a class="nav__link" href="/rooms">Новая заявка</a>
-                <a class="nav__link" href="/login">Войти</a>
+                {% if current_user.is_authenticated %}
+                    {% if current_user.role == 'admin' %}
+                        <a class="nav__link" href="{{ url_for('admin') }}">Заявки</a>
+                        <a class="nav__link" href="{{ url_for('logout') }}">Выйти</a>
+                    {% else %}
+                        <a class="nav__link" href="{{ url_for('cabinet') }}">Мои заявки</a>
+                        <a class="nav__link" href="{{ url_for('booking_new') }}">Новая заявка</a>
+                        <a class="nav__link" href="{{ url_for('logout') }}">Выйти</a>
+                    {% endif %}
+                {% else %}
+                    <a class="nav__link" href="{{ url_for('login') }}">Вход</a>
+                    <a class="nav__link" href="{{ url_for('register') }}">Регистрация</a>
+                {% endif %}
             </nav>
         </div>
     </header>
+
     <!-- Основное содержимое -->
-    <main class="main">
+    <main class="main container">
+        {% for category, message in get_flashed_messages(with_categories=true) %}
+            <div class="alert alert-{{ category if category != 'message' else 'info' }} message">{{ message }}</div>
+        {% endfor %}
         {% block content %}
-            
         {% endblock %}
     </main>
+
     <!-- Подвал -->
-     <footer class="footer">
-        <div class="container">
-            <p class="footer__text">© 2027 Конференции.РФ</p>
+    <footer class="footer">
+        <div class="container footer__inner">
+            <p class="footer__text">© 2027 Конференции.РФ — бронирование помещений для всероссийских конференций</p>
         </div>
     </footer>
+
+    <!-- Bootstrap Bundle JS (содержит Popper для работы слайдера и выпадающих меню) -->
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    {% block scripts %}{% endblock %}
 </body>
 </html>

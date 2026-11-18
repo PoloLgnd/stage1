@@ -1,5 +1,5 @@
 /* =========================================================
-   Стили портала «Конференции.РФ» (Этап 4)
+   Стили портала «Конференции.РФ» (Этап 4 и Этап 8)
    Имена классов по методологии БЭМ: блок__элемент--модификатор
    ========================================================= */
 
@@ -84,6 +84,11 @@ a {
     box-shadow: 0 6px 14px rgba(31, 78, 140, 0.25);
 }
 
+.message {
+    animation: slide-down 0.4s ease;
+    border-radius: 8px;
+}
+
 /* ---------- Шапка и меню (БЭМ + Flexbox) ---------- */
 .header {
     background: var(--color-primary);
@@ -100,10 +105,19 @@ a {
 }
 
 .header__logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: #fff;
     font-size: var(--font-h2);
     font-weight: 700;
     text-decoration: none;
+}
+
+.header__logo-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
 }
 
 .nav {
@@ -196,6 +210,14 @@ a {
     gap: 8px;
 }
 
+.booking-card__review {
+    margin-top: 12px;
+    font-style: italic;
+    background: #f8f9fa;
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
 /* ---------- Значок статуса ---------- */
 .status {
     display: inline-block;
@@ -250,6 +272,19 @@ a {
 }
 
 /* ---------- Кабинет и панель администратора ---------- */
+.cabinet__hello {
+    font-size: 1.125rem;
+    color: var(--color-muted);
+    margin-bottom: 16px;
+}
+
+.cabinet__empty,
+.admin__empty {
+    font-size: 1rem;
+    color: var(--color-muted);
+    margin-top: 20px;
+}
+
 .cabinet__list {
     margin-top: 16px;
 }
@@ -271,6 +306,7 @@ a {
     background: var(--color-text);
     color: #cfd6e4;
     padding: 16px 0;
+    margin-top: auto;
 }
 
 .footer__text {
@@ -281,6 +317,11 @@ a {
 /* ---------- Анимации (@keyframes) ---------- */
 @keyframes fade-in {
     from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+    from { opacity: 0; transform: translateY(-10px); }
     to   { opacity: 1; transform: translateY(0); }
 }
 

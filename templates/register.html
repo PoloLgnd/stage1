@@ -1,42 +1,56 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
-{% block title %}Регистрация{% endblock %}
+{% block title %}Регистрация — Конференции.РФ{% endblock %}
 
 {% block content %}
-    <section class="form-box">
-        <h1 class="form-box__title">Регистрация</h1>
-        <form id="registerForm" class="form" method="post" action="/register" novalidate>
-            <div class="form__group">
-                <label class="form-label" for="login">Логин</label>
-                <input class="form-control" id="login" name="login" type="text" placeholder="ivanov2027">
-                <small class="form__hint">Латиница и цифры, не менее 6 символов</small>
-                <div class="form__error"></div>
-            </div>
-            <div class="form__group">
-                <label class="form-label" for="password">Пароль</label>
-                <input class="form-control" id="password" name="password" type="password">
-                <small class="form__hint">Не менее 8 символов</small>
-                <div class="form__error"></div>
-            </div>
-            <div class="form__group">
-                <label class="form-label" for="full_name">ФИО</label>
-                <input class="form-control" id="full_name" name="full_name" type="text" placeholder="Иванов Иван Иванович">
-                <small class="form__hint">Только кириллица и пробелы</small>
-                <div class="form__error"></div>
-            </div>
-            <div class="form__group">
-                <label class="form-label" for="phone">Телефон</label>
-                <input class="form-control" id="phone" name="phone" type="tel" placeholder="8(900)123-45-67">
-                <small class="form__hint">Формат: 8(XXX)XXX-XX-XX</small>
-                <div class="form__error"></div>
-            </div>
-            <div class="form__group">
-                <label class="form-label" for="email">Электронная почта</label>
-                <input class="form-control" id="email" name="email" type="email" placeholder="name@example.ru">
-                <div class="form__error"></div>
-            </div>
-            <button class="btn btn-primary button w-100" type="submit">Создать пользователя</button>
-        </form>
-        <p class="form-box__switch">Уже зарегистрированы? <a href="login.html">Войти</a></p>
-    </section>
+<section class="form-box">
+    <h1 class="form-box__title">Регистрация</h1>
+    <!-- novalidate: отключаем всплывающие подсказки браузера, ошибки показывает validation.js -->
+    <form id="registerForm" class="form" method="post" action="{{ url_for('register') }}" novalidate>
+        <div class="form__group">
+            <label class="form-label" for="login">Логин</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.login }}" id="login" name="login" type="text"
+                   value="{{ form.login if form and form.login else '' }}" placeholder="ivanov2027">
+            <small class="form__hint">Латиница и цифры, не менее 6 символов</small>
+            <div class="form__error">{{ errors.login if errors and errors.login else '' }}</div>
+        </div>
+
+        <div class="form__group">
+            <label class="form-label" for="password">Пароль</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.password }}" id="password" name="password" type="password">
+            <small class="form__hint">Не менее 8 символов</small>
+            <div class="form__error">{{ errors.password if errors and errors.password else '' }}</div>
+        </div>
+
+        <div class="form__group">
+            <label class="form-label" for="full_name">ФИО</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.full_name }}" id="full_name" name="full_name" type="text"
+                   value="{{ form.full_name if form and form.full_name else '' }}" placeholder="Иванов Иван Иванович">
+            <small class="form__hint">Только кириллица и пробелы</small>
+            <div class="form__error">{{ errors.full_name if errors and errors.full_name else '' }}</div>
+        </div>
+
+        <div class="form__group">
+            <label class="form-label" for="phone">Телефон</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.phone }}" id="phone" name="phone" type="tel"
+                   value="{{ form.phone if form and form.phone else '' }}" placeholder="8(900)123-45-67">
+            <small class="form__hint">Формат: 8(XXX)XXX-XX-XX</small>
+            <div class="form__error">{{ errors.phone if errors and errors.phone else '' }}</div>
+        </div>
+
+        <div class="form__group">
+            <label class="form-label" for="email">Электронная почта</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.email }}" id="email" name="email" type="email"
+                   value="{{ form.email if form and form.email else '' }}" placeholder="name@example.ru">
+            <div class="form__error">{{ errors.email if errors and errors.email else '' }}</div>
+        </div>
+
+        <button class="btn btn-primary button w-100" type="submit">Создать пользователя</button>
+    </form>
+    <p class="form-box__switch">Уже зарегистрированы? <a href="{{ url_for('login') }}">Войти</a></p>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/validation.js') }}"></script>
 {% endblock %}

@@ -1,29 +1,42 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+{% block title %}Новая заявка — Конференции.РФ{% endblock %}
 
 {% block content %}
-    <section class="form-box">
-        <h1 class="form-box__title">Новая заявка</h1>
-        <form class="form" method="post" action="/booking/new">
-            <div class="form__group">
-                <label class="form-label" for="room_name">Помещение</label>
-                <input class="form-control" id="room_name" name="room_name" type="text" placeholder="Например: Кинозал «Премьер»">
+<section class="form-box">
+    <h1 class="form-box__title">Новая заявка</h1>
+    <form class="form" method="post" action="{{ url_for('booking_new') }}" novalidate>
+        <div class="form__group">
+            <label class="form-label" for="room_name">Помещение</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.room }}" id="room_name" name="room_name"
+                   type="text" value="{{ form.room_name if form and form.room_name else '' }}" placeholder="Например: Кинозал «Премьер»">
+            <small class="form__hint">Введите название или выберите из списка</small>
+            <div class="form__error">{{ errors.room if errors and errors.room else '' }}</div>
+        </div>
+
+        <div class="form__group">
+            <label class="form-label" for="start_date">Дата начала конференции</label>
+            <input class="form-control {{ 'is-invalid' if errors and errors.start_date }}" id="start_date" name="start_date"
+                   type="text" value="{{ form.start_date if form and form.start_date else '' }}" placeholder="ДД.ММ.ГГГГ">
+            <div class="form__error">{{ errors.start_date if errors and errors.start_date else '' }}</div>
+        </div>
+
+        <fieldset class="form__group">
+            <legend class="form-label form__legend">Способ оплаты</legend>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="pay1" name="payment_method"
+                       value="При очном посещении" {{ 'checked' if not form or not form.payment_method or form.payment_method == 'При очном посещении' }}>
+                <label class="form-check-label" for="pay1">При очном посещении</label>
             </div>
-            <div class="form__group">
-                <label class="form-label" for="start_date">Дата начала конференции</label>
-                <input class="form-control" id="start_date" name="start_date" type="text" placeholder="ДД.ММ.ГГГГ">
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="pay2" name="payment_method"
+                       value="Перевод по СБП" {{ 'checked' if form and form.payment_method == 'Перевод по СБП' }}>
+                <label class="form-check-label" for="pay2">Перевод по СБП</label>
             </div>
-            <fieldset class="form__group">
-                <legend class="form-label form__legend">Способ оплаты</legend>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" id="pay1" name="payment_method" value="При очном посещении" checked>
-                    <label class="form-check-label" for="pay1">При очном посещении</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" id="pay2" name="payment_method" value="Перевод по СБП">
-                    <label class="form-check-label" for="pay2">Перевод по СБП</label>
-                </div>
-            </fieldset>
-            <button class="btn btn-primary button w-100" type="submit">Отправить</button>
-        </form>
-    </section>
+            <div class="form__error">{{ errors.payment_method if errors and errors.payment_method else '' }}</div>
+        </fieldset>
+
+        <button class="btn btn-primary button w-100" type="submit">Отправить</button>
+    </form>
+</section>
 {% endblock %}
