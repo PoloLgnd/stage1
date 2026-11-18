@@ -5,15 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Вход - Конференция РФ{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css' ) }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css' ) }}">
 </head>
 <body>
     <!-- Шапка -->
     <header class="header">
-        <a href="/" class="header__logo">Конфиренция РФ</a>
-        <nav class="nav">
-            <a href="/login" class="nav__link">Вход</a>
-            <a href="/register" class="nav__link">Регистрация</a>
-        </nav>
+        <div class="container header__inner">
+            <a class="header__logo" href="/">Конференции.РФ</a>
+            <nav class="nav">
+                <a class="nav__link" href="/rooms">Мои заявки</a>
+                <a class="nav__link" href="/rooms">Новая заявка</a>
+                <a class="nav__link" href="/login">Войти</a>
+            </nav>
+        </div>
     </header>
     <!-- Основное содержимое -->
     <main class="main">
@@ -22,8 +26,10 @@
         {% endblock %}
     </main>
     <!-- Подвал -->
-    <footer class="footer">
-        <p>Конфиренции 2027</p>
+     <footer class="footer">
+        <div class="container">
+            <p class="footer__text">© 2027 Конференции.РФ</p>
+        </div>
     </footer>
 </body>
 </html>

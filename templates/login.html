@@ -2,16 +2,21 @@
 
 {% block content %}
     <section class="form-box">
-        <h1>Вход в систему</h1>
-        <form method="POST" action="/login">
-            <label for="login">Логин</label>
-            <input id="login" name="login" type="text">
-
-            <label for="password">Пароль</label>
-            <input id="password" name="password" type="password">
-
-            <button class="submit">Войти</button>
+        <h1 class="form-box__title">Вход в систему</h1>
+        <div class="message"></div>
+        <form id="loginForm" class="form" method="post" action="/login" novalidate>
+            <div class="form__group">
+                <label class="form-label" for="login">Логин</label>
+                <input class="form-control" id="login" name="login" type="text">
+                <div class="form__error"></div>
+            </div>
+            <div class="form__group">
+                <label class="form-label" for="password">Пароль</label>
+                <input class="form-control" id="password" name="password" type="password">
+                <div class="form__error"></div>
+            </div>
+            <button class="btn btn-primary button w-100" type="submit">Войти</button>
         </form>
-        <p>Еще не зраегистрированны? <a href="/register">Регистрация</a></p>
+        <p class="form-box__switch">Еще не зарегистрированы? <a href="register.html">Регистрация</a></p>
     </section>
 {% endblock %}

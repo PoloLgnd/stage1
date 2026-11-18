@@ -4,25 +4,39 @@
 
 {% block content %}
     <section class="form-box">
-        <h1>Регистрация в систему</h1>
-        <form method="POST" action="/login">
-            <label for="login">Логин</label>
-            <input placeholder="ivan0123" id="login" name="login" type="text">
-
-            <label for="password">Пароль</label>
-            <input id="password" name="password" type="password">
-
-            <label for="fio">ФИО</label>
-            <input placeholder="Иван Иванов Иванович" id="fio" name="fio" type="fio">
-
-            <label for="tel">Телефон</label>
-            <input placeholder="7 xxx xxx xx xx" id="tel" name="tel" type="phone">
-
-            <label for="email">Почта</label>
-            <input placeholder="example@email.com" id="email" name="email" type="email">
-
-            <button class="submit">Зарегистрироваться</button>
+        <h1 class="form-box__title">Регистрация</h1>
+        <form id="registerForm" class="form" method="post" action="/register" novalidate>
+            <div class="form__group">
+                <label class="form-label" for="login">Логин</label>
+                <input class="form-control" id="login" name="login" type="text" placeholder="ivanov2027">
+                <small class="form__hint">Латиница и цифры, не менее 6 символов</small>
+                <div class="form__error"></div>
+            </div>
+            <div class="form__group">
+                <label class="form-label" for="password">Пароль</label>
+                <input class="form-control" id="password" name="password" type="password">
+                <small class="form__hint">Не менее 8 символов</small>
+                <div class="form__error"></div>
+            </div>
+            <div class="form__group">
+                <label class="form-label" for="full_name">ФИО</label>
+                <input class="form-control" id="full_name" name="full_name" type="text" placeholder="Иванов Иван Иванович">
+                <small class="form__hint">Только кириллица и пробелы</small>
+                <div class="form__error"></div>
+            </div>
+            <div class="form__group">
+                <label class="form-label" for="phone">Телефон</label>
+                <input class="form-control" id="phone" name="phone" type="tel" placeholder="8(900)123-45-67">
+                <small class="form__hint">Формат: 8(XXX)XXX-XX-XX</small>
+                <div class="form__error"></div>
+            </div>
+            <div class="form__group">
+                <label class="form-label" for="email">Электронная почта</label>
+                <input class="form-control" id="email" name="email" type="email" placeholder="name@example.ru">
+                <div class="form__error"></div>
+            </div>
+            <button class="btn btn-primary button w-100" type="submit">Создать пользователя</button>
         </form>
-        <p>Уже зарегистрированны? <a href="/login">Войти</a></p>
+        <p class="form-box__switch">Уже зарегистрированы? <a href="login.html">Войти</a></p>
     </section>
 {% endblock %}

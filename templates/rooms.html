@@ -1,18 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <label for="room">Помещение</label>
-    <select name="room_id" id="room">
-        <option value="">Выберите</option>
-        <option value="1">Аудитория</option>
-        <option value="2">Коворкинг</option>
-    </select>
-
-    <input type="radio" id="pay1" name="payment_method" value="При очном посещении">
-    <label for="pay1">ПРи очном посещении</label>
-    <input type="radio" id="pay2" name="payment_method" value="Перевод по СБП">
-    <label for="pay2">Перевод по СБП</label>
-
-    <label for="review">Отзыв</label>
-    <textarea name="text" id="review" rows="3"></textarea>
+    <section class="form-box">
+        <h1 class="form-box__title">Новая заявка</h1>
+        <form class="form" method="post" action="/booking/new">
+            <div class="form__group">
+                <label class="form-label" for="room_name">Помещение</label>
+                <input class="form-control" id="room_name" name="room_name" type="text" placeholder="Например: Кинозал «Премьер»">
+            </div>
+            <div class="form__group">
+                <label class="form-label" for="start_date">Дата начала конференции</label>
+                <input class="form-control" id="start_date" name="start_date" type="text" placeholder="ДД.ММ.ГГГГ">
+            </div>
+            <fieldset class="form__group">
+                <legend class="form-label form__legend">Способ оплаты</legend>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="pay1" name="payment_method" value="При очном посещении" checked>
+                    <label class="form-check-label" for="pay1">При очном посещении</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="pay2" name="payment_method" value="Перевод по СБП">
+                    <label class="form-check-label" for="pay2">Перевод по СБП</label>
+                </div>
+            </fieldset>
+            <button class="btn btn-primary button w-100" type="submit">Отправить</button>
+        </form>
+    </section>
 {% endblock %}
